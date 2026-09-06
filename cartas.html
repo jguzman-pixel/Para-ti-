@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Nuestras Cartas 💚</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#010402;
+    color:white;
+}
+
+/* =========================
+   FONDO
+========================= */
+
+body{
+    background:
+        radial-gradient(circle at center,
+        #063d20 0%,
+        #03170c 45%,
+        #010402 100%);
+}
+
+/* =========================
+   UNIVERSO
+========================= */
+
+.galaxia{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    z-index:0;
+}
+
+/* =========================
+   ESTRELLAS
+========================= */
+
+.estrella{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:#ffffff;
+    border-radius:50%;
+    box-shadow:
+        0 0 5px #ffffff,
+        0 0 10px #00ff88,
+        0 0 15px #00ff88;
+
+    animation:
+        parpadeo 2s infinite ease-in-out,
+        movimientoEstrella 8s infinite ease-in-out;
+
+    opacity:.8;
+}
+
+@keyframes parpadeo{
+
+    0%,100%{
+        opacity:.25;
+        transform:scale(.7);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(1.5);
+    }
+}
+
+@keyframes movimientoEstrella{
+
+    0%{
+        margin-left:0;
+        margin-top:0;
+    }
+
+    50%{
+        margin-left:15px;
+        margin-top:-20px;
+    }
+
+    100%{
+        margin-left:0;
+        margin-top:0;
+    }
+}
+
+/* =========================
+   FOTOS
+========================= */
+
+.foto{
+    position:absolute;
+
+    width:70px;
+    height:70px;
+
+    object-fit:cover;
+
+    border-radius:14px;
+
+    opacity:.35;
+
+    border:1px solid rgba(0,255,136,.5);
+
+    box-shadow:
+        0 0 8px rgba(0,255,136,.25),
+        0 0 18px rgba(0,255,136,.15);
+
+    animation:
+        movimientoFoto var(--duracion) ease-in-out infinite alternate;
+
+    pointer-events:none;
+}
+
+@keyframes movimientoFoto{
+
+    0%{
+        transform:
+            translate(0,0)
+            rotate(var(--rot1));
+    }
+
+    25%{
+        transform:
+            translate(var(--x1),var(--y1))
+            rotate(var(--rot2));
+    }
+
+    50%{
+        transform:
+            translate(var(--x2),var(--y2))
+            rotate(var(--rot3));
+    }
+
+    75%{
+        transform:
+            translate(var(--x3),var(--y3))
+            rotate(var(--rot4));
+    }
+
+    100%{
+        transform:
+            translate(var(--x4),var(--y4))
+            rotate(var(--rot5));
+    }
+}
+
+/* =========================
+   CONTENEDOR PRINCIPAL
+========================= */
+
+.contenido{
+    position:relative;
+    z-index:10;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+}
+
+/* =========================
+   TITULO
+========================= */
+
+.titulo{
+
+    font-size:clamp(28px,7vw,48px);
+
+    color:#66ffb0;
+
+    text-align:center;
+
+    text-shadow:
+        0 0 10px #00ff88,
+        0 0 25px #00ff88,
+        0 0 45px rgba(0,255,136,.7);
+
+    margin-bottom:10px;
+
+    animation:
+        aparecerTitulo 1.5s ease forwards;
+
+}
+
+.subtitulo{
+
+    font-size:15px;
+
+    color:rgba(255,255,255,.75);
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+    letter-spacing:1px;
+
+}
+
+@keyframes aparecerTitulo{
+
+    from{
+        opacity:0;
+        transform:translateY(-20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* =========================
+   SOBRES
+========================= */
+
+.sobres{
+
+    width:min(900px,95%);
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    gap:22px;
+
+    justify-content:center;
+
+}
+
+/* =========================
+   SOBRE
+========================= */
+
+.sobre{
+
+    position:relative;
+
+    width:140px;
+    height:105px;
+
+    margin:auto;
+
+    cursor:pointer;
+
+    perspective:800px;
+
+    animation:
+        aparecerSobre .8s ease forwards;
+
+    transition:
+        transform .3s ease;
+}
+
+.sobre:hover{
+    transform:translateY(-8px) scale(1.03);
+}
+
+.sobre:active{
+    transform:scale(.95);
+}
+
+/* cuerpo */
+
+.sobre-cuerpo{
+
+    position:absolute;
+
+    left:0;
+    bottom:0;
+
+    width:100%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #064d29,
+            #08783f
+        );
+
+    border-radius:8px;
+
+    border:1px solid rgba(102,255,176,.6);
+
+    box-shadow:
+        0 0 12px rgba(0,255,136,.5),
+        0 0 30px rgba(0,255,136,.2);
+
+    overflow:hidden;
+
+}
+
+/* triangulo frontal */
+
+.sobre-cuerpo::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:0;
+
+    width:0;
+    height:0;
+
+    border-left:
+        70px solid transparent;
+
+    border-right:
+        70px solid transparent;
+
+    border-bottom:
+        55px solid rgba(0,40,20,.55);
+
+}
+
+/* lado izquierdo */
+
+.sobre-cuerpo::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:0;
+
+    width:0;
+    height:0;
+
+    border-top:
+        52px solid transparent;
+
+    border-right:
+        70px solid rgba(0,60,30,.45);
+
+}
+
+/* =========================
+   SOLAPA
+========================= */
+
+.solapa{
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:65px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0b8b4b,
+            #075d31
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
+
+    transform-origin:top;
+
+    transition:
+        transform .7s ease;
+
+    z-index:3;
+
+    filter:
+        drop-shadow(
+            0 0 5px rgba(0,255,136,.5)
+        );
+
+}
+
+/* sello */
+
+.sello{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:34px;
+    height:34px;
+
+    border-radius:50%;
+
+    background:#66ffb0;
+
+    color:#034d29;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:17px;
+
+    box-shadow:
+        0 0 10px #00ff88,
+        0 0 20px #00ff88;
+
+    z-index:4;
+
+}
+
+/* numero */
+
+.numero{
+
+    position:absolute;
+
+    bottom:10px;
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    color:#d5ffe9;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    z-index:5;
+
+}
+
+/* =========================
+   ANIMACIÓN SOBRES
+========================= */
+
+@keyframes aparecerSobre{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(40px)
+            scale(.8);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+.sobre:nth-child(1){
+    animation-delay:.2s;
+}
+
+.sobre:nth-child(2){
+    animation-delay:.4s;
+}
+
+.sobre:nth-child(3){
+    animation-delay:.6s;
+}
+
+.sobre:nth-child(4){
+    animation-delay:.8s;
+}
+
+.sobre:nth-child(5){
+    animation-delay:1s;
+}
+
+/* =========================
+   CARTA ABIERTA
+========================= */
+
+.carta-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:100;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        rgba(0,10,5,.82);
+
+    backdrop-filter:
+        blur(8px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:
+        opacity .4s ease;
+
+}
+
+.carta-overlay.activa{
+
+    opacity:1;
+
+    pointer-events:auto;
+
+}
+
+/* =========================
+   CARTA
+========================= */
+
+.carta{
+
+    width:
+        min(650px,94vw);
+
+    max-height:
+        85vh;
+
+    overflow-y:auto;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #f0fff7,
+            #d9f7e7
+        );
+
+    color:#123d27;
+
+    border-radius:18px;
+
+    padding:35px 28px 25px;
+
+    position:relative;
+
+    box-shadow:
+
+        0 0 20px #00ff88,
+        0 0 60px rgba(0,255,136,.35);
+
+    transform:
+        scale(.7)
+        rotate(-3deg);
+
+    transition:
+        transform .5s cubic-bezier(.2,.8,.2,1);
+
+}
+
+.carta-overlay.activa .carta{
+
+    transform:
+        scale(1)
+        rotate(0deg);
+
+}
+
+/* =========================
+   DECORACIÓN CARTA
+========================= */
+
+.carta::before{
+
+    content:"💚";
+
+    position:absolute;
+
+    top:12px;
+    right:18px;
+
+    font-size:24px;
+
+    filter:
+        drop-shadow(
+            0 0 5px #00aa55
+        );
+
+}
+
+/* =========================
+   TITULO CARTA
+========================= */
+
+.carta-titulo{
+
+    text-align:center;
+
+    font-size:
+        clamp(24px,6vw,34px);
+
+    color:#08783f;
+
+    margin-bottom:22px;
+
+}
+
+/* =========================
+   TEXTO
+========================= */
+
+.carta-texto{
+
+    font-size:16px;
+
+    line-height:1.7;
+
+    white-space:pre-line;
+
+    text-align:left;
+
+}
+
+/* =========================
+   CERRAR
+========================= */
+
+.cerrar{
+
+    display:block;
+
+    margin:
+        28px auto 0;
+
+    border:none;
+
+    padding:
+        12px 25px;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00cc66,
+            #08783f
+        );
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 12px rgba(0,255,136,.6);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+
+}
+
+.cerrar:active{
+
+    transform:scale(.94);
+
+}
+
+/* =========================
+   BOTON VOLVER
+========================= */
+
+.volver{
+
+    margin-top:35px;
+
+    padding:
+        11px 22px;
+
+    border-radius:25px;
+
+    border:
+        1px solid rgba(0,255,136,.5);
+
+    background:
+        rgba(0,70,35,.45);
+
+    color:#9dffca;
+
+    font-size:14px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 10px rgba(0,255,136,.2);
+
+}
+
+/* =========================
+   MOVIL
+========================= */
+
+@media(max-width:700px){
+
+    .contenido{
+        padding:15px;
+    }
+
+    .titulo{
+        font-size:31px;
+    }
+
+    .subtitulo{
+        margin-bottom:25px;
+        font-size:13px;
+    }
+
+    .sobres{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:18px;
+
+        max-width:360px;
+
+    }
+
+    .sobre{
+
+        width:125px;
+        height:94px;
+
+    }
+
+    .sobre-cuerpo::before{
+
+        border-left-width:62px;
+        border-right-width:62px;
+
+    }
+
+    .sobre-cuerpo::after{
+
+        border-right-width:62px;
+
+    }
+
+    .solapa{
+        height:58px;
+    }
+
+    .carta{
+
+        padding:
+            30px 20px 20px;
+
+        max-height:82vh;
+
+    }
+
+    .carta-texto{
+
+        font-size:15px;
+        line-height:1.6;
+
+    }
+
+    .foto{
+
+        width:55px;
+        height:55px;
+
+    }
+
+}
+
+/* celular muy pequeño */
+
+@media(max-width:380px){
+
+    .sobres{
+        gap:12px;
+    }
+
+    .sobre{
+
+        width:115px;
+        height:86px;
+
+    }
+
+    .sobre-cuerpo::before{
+
+        border-left-width:57px;
+        border-right-width:57px;
+
+    }
+
+    .sobre-cuerpo::after{
+
+        border-right-width:57px;
+
+    }
+
+    .solapa{
+        height:52px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     UNIVERSO
+========================= -->
+
+<div class="galaxia" id="galaxia"></div>
+
+
+<!-- =========================
+     CONTENIDO
+========================= -->
+
+<div class="contenido">
+
+    <h1 class="titulo">
+        Nuestras cartas 💚
+    </h1>
+
+    <p class="subtitulo">
+        Hay algo escrito para ti en cada sobre...
+    </p>
+
+
+    <div class="sobres">
+
+        <!-- SOBRE 1 -->
+
+        <div
+            class="sobre"
+            onclick="abrirCarta(0)"
+        >
+
+            <div class="sobre-cuerpo">
+
+                <div class="numero">
+                    CARTA 01
+                </div>
+
+            </div>
+
+            <div class="solapa">
+
+                <div class="sello">
+                    💚
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SOBRE 2 -->
+
+        <div
+            class="sobre"
+            onclick="abrirCarta(1)"
+        >
+
+            <div class="sobre-cuerpo">
+
+                <div class="numero">
+                    CARTA 02
+                </div>
+
+            </div>
+
+            <div class="solapa">
+
+                <div class="sello">
+                    💚
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SOBRE 3 -->
+
+        <div
+            class="sobre"
+            onclick="abrirCarta(2)"
+        >
+
+            <div class="sobre-cuerpo">
+
+                <div class="numero">
+                    CARTA 03
+                </div>
+
+            </div>
+
+            <div class="solapa">
+
+                <div class="sello">
+                    💚
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SOBRE 4 -->
+
+        <div
+            class="sobre"
+            onclick="abrirCarta(3)"
+        >
+
+            <div class="sobre-cuerpo">
+
+                <div class="numero">
+                    CARTA 04
+                </div>
+
+            </div>
+
+            <div class="solapa">
+
+                <div class="sello">
+                    💚
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SOBRE 5 -->
+
+        <div
+            class="sobre"
+            onclick="abrirCarta(4)"
+        >
+
+            <div class="sobre-cuerpo">
+
+                <div class="numero">
+                    CARTA 05
+                </div>
+
+            </div>
+
+            <div class="solapa">
+
+                <div class="sello">
+                    💚
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="volver"
+        onclick="window.location.href='index.html'"
+    >
+        🌌 Volver al universo
+    </button>
+
+</div>
+
+
+<!-- =========================
+     CARTA ABIERTA
+========================= -->
+
+<div
+    class="carta-overlay"
+    id="cartaOverlay"
+>
+
+    <div class="carta">
+
+        <h2
+            class="carta-titulo"
+            id="cartaTitulo"
+        >
+        </h2>
+
+        <div
+            class="carta-texto"
+            id="cartaTexto"
+        >
+        </div>
+
+        <button
+            class="cerrar"
+            onclick="cerrarCarta()"
+        >
+            ✕ Cerrar carta
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   ESTRELLAS
+========================= */
+
+const galaxia =
+    document.getElementById("galaxia");
+
+for(let i = 0; i < 100; i++){
+
+    const estrella =
+        document.createElement("div");
+
+    estrella.className =
+        "estrella";
+
+    estrella.style.left =
+        Math.random()*100 + "%";
+
+    estrella.style.top =
+        Math.random()*100 + "%";
+
+    estrella.style.animationDelay =
+        Math.random()*4 + "s";
+
+    estrella.style.animationDuration =
+        (1.5 + Math.random()*3) + "s";
+
+    galaxia.appendChild(estrella);
+
+}
+
+
+/* =========================
+   FOTOS
+========================= */
+
+for(let i = 1; i <= 33; i++){
+
+    const foto =
+        document.createElement("img");
+
+    foto.className =
+        "foto";
+
+    const numero =
+        String(i).padStart(2,"0");
+
+    foto.src =
+        `fotos/foto${numero}.jpg`;
+
+    foto.style.left =
+        Math.random()*92 + "%";
+
+    foto.style.top =
+        Math.random()*85 + "%";
+
+    foto.style.setProperty(
+        "--x1",
+        `${-80 + Math.random()*160}px`
+    );
+
+    foto.style.setProperty(
+        "--y1",
+        `${-80 + Math.random()*160}px`
+    );
+
+    foto.style.setProperty(
+        "--x2",
+        `${-120 + Math.random()*240}px`
+    );
+
+    foto.style.setProperty(
+        "--y2",
+        `${-120 + Math.random()*240}px`
+    );
+
+    foto.style.setProperty(
+        "--x3",
+        `${-100 + Math.random()*200}px`
+    );
+
+    foto.style.setProperty(
+        "--y3",
+        `${-100 + Math.random()*200}px`
+    );
+
+    foto.style.setProperty(
+        "--x4",
+        `${-150 + Math.random()*300}px`
+    );
+
+    foto.style.setProperty(
+        "--y4",
+        `${-150 + Math.random()*300}px`
+    );
+
+    foto.style.setProperty(
+        "--rot1",
+        `${-10 + Math.random()*20}deg`
+    );
+
+    foto.style.setProperty(
+        "--rot2",
+        `${-15 + Math.random()*30}deg`
+    );
+
+    foto.style.setProperty(
+        "--rot3",
+        `${-20 + Math.random()*40}deg`
+    );
+
+    foto.style.setProperty(
+        "--rot4",
+        `${-15 + Math.random()*30}deg`
+    );
+
+    foto.style.setProperty(
+        "--rot5",
+        `${-10 + Math.random()*20}deg`
+    );
+
+    foto.style.setProperty(
+        "--duracion",
+        `${8 + Math.random()*12}s`
+    );
+
+    foto.style.animationDelay =
+        `${-Math.random()*10}s`;
+
+    galaxia.appendChild(foto);
+
+}
+
+
+/* =========================
+   CARTAS
+========================= */
+
+const cartas = [
+
+    {
+        titulo:"Carta 01 💚",
+        texto:`Aquí va el texto de la primera carta.
+
+Puedes escribir todo lo que quieras aquí.
+
+Puedes hacer varios párrafos y la carta se adaptará automáticamente al tamaño de la pantalla.`
+    },
+
+    {
+        titulo:"Carta 02 ✨",
+        texto:`Aquí va el texto de la segunda carta.
+
+Esta puede tener un mensaje completamente diferente a la primera.`
+    },
+
+    {
+        titulo:"Carta 03 🌌",
+        texto:`Aquí va el texto de la tercera carta.
+
+Puedes hacerla más larga y agregar todos los recuerdos que quieras.`
+    },
+
+    {
+        titulo:"Carta 04 💫",
+        texto:`Aquí va el texto de la cuarta carta.
+
+Cada sobre puede tener su propio mensaje especial.`
+    },
+
+    {
+        titulo:"Carta 05 💚",
+        texto:`Aquí va el texto de la quinta carta.
+
+Y cuando terminen de leerla podrán cerrarla y abrir cualquiera de las demás.`
+    }
+
+];
+
+
+/* =========================
+   ABRIR CARTA
+========================= */
+
+function abrirCarta(numero){
+
+    const overlay =
+        document.getElementById(
+            "cartaOverlay"
+        );
+
+    const titulo =
+        document.getElementById(
+            "cartaTitulo"
+        );
+
+    const texto =
+        document.getElementById(
+            "cartaTexto"
+        );
+
+    titulo.textContent =
+        cartas[numero].titulo;
+
+    texto.textContent =
+        cartas[numero].texto;
+
+    overlay.classList.add(
+        "activa"
+    );
+
+}
+
+
+/* =========================
+   CERRAR CARTA
+========================= */
+
+function cerrarCarta(){
+
+    const overlay =
+        document.getElementById(
+            "cartaOverlay"
+        );
+
+    overlay.classList.remove(
+        "activa"
+    );
+
+}
+
+
+/* =========================
+   CERRAR TOCANDO AFUERA
+========================= */
+
+document
+    .getElementById("cartaOverlay")
+    .addEventListener(
+        "click",
+        function(e){
+
+            if(
+                e.target === this
+            ){
+
+                cerrarCarta();
+
+            }
+
+        }
+    );
+
+
+/* =========================
+   ESC
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Escape"){
+
+            cerrarCarta();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

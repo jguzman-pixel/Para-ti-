@@ -1,0 +1,2223 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>💚 Nuestro Universo 💚</title>
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    background:#020603;
+
+    font-family:Arial,sans-serif;
+}
+
+
+/* =====================================================
+   CONTRASEÑA
+===================================================== */
+
+#bloqueo{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:10000;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+    radial-gradient(
+        circle at center,
+        #063d20 0%,
+        #03170c 45%,
+        #010402 100%
+    );
+
+    color:white;
+
+    transition:
+        opacity .7s ease;
+}
+
+
+#bloqueo h1{
+
+    font-size:28px;
+
+    margin-bottom:15px;
+
+    text-shadow:
+        0 0 10px #00ff88,
+        0 0 25px #00cc66;
+}
+
+
+#bloqueo p{
+
+    font-size:15px;
+
+    opacity:.75;
+
+    margin-bottom:20px;
+}
+
+
+#pantallaPassword{
+
+    width:210px;
+
+    height:48px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.3);
+
+    border-radius:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:25px;
+
+    letter-spacing:8px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    margin-bottom:20px;
+}
+
+
+#teclado{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,65px);
+
+    gap:10px;
+}
+
+
+.botonNumero{
+
+    width:65px;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:
+        rgba(0,255,120,.09);
+
+    color:white;
+
+    font-size:20px;
+
+    box-shadow:
+
+        inset 0 0 10px
+        rgba(255,255,255,.04),
+
+        0 0 8px
+        rgba(0,255,120,.15);
+
+    cursor:pointer;
+}
+
+
+.botonNumero:active{
+
+    transform:scale(.94);
+
+    background:
+        rgba(0,255,120,.3);
+}
+
+
+#errorPassword{
+
+    height:20px;
+
+    margin-top:15px;
+
+    color:#66ffb0;
+
+    font-size:14px;
+}
+
+
+/* =====================================================
+   UNIVERSO
+===================================================== */
+
+#universo{
+
+    position:fixed;
+
+    inset:0;
+
+    overflow:hidden;
+
+    background:
+    radial-gradient(
+        circle at 50% 50%,
+        #063d20 0%,
+        #03170c 45%,
+        #010402 100%
+    );
+
+    opacity:0;
+
+    pointer-events:none;
+
+    touch-action:none;
+
+    transition:
+        opacity 1.5s ease;
+}
+
+
+#universo.activo{
+
+    opacity:1;
+
+    pointer-events:auto;
+}
+
+
+/* =====================================================
+   GALAXIAS VERDES
+===================================================== */
+
+.galaxia{
+
+    position:absolute;
+
+    width:280px;
+
+    height:110px;
+
+    border-radius:50%;
+
+    opacity:.35;
+
+    filter:blur(1px);
+
+    background:
+    radial-gradient(
+        ellipse,
+        rgba(0,255,130,.75) 0%,
+        rgba(0,180,90,.25) 30%,
+        transparent 70%
+    );
+
+    pointer-events:none;
+}
+
+
+.g1{
+
+    left:-80px;
+
+    top:15%;
+}
+
+
+.g2{
+
+    right:-100px;
+
+    top:55%;
+
+    transform:
+        rotate(35deg);
+}
+
+
+.g3{
+
+    left:25%;
+
+    bottom:-50px;
+
+    transform:
+        rotate(-10deg);
+}
+
+
+/* =====================================================
+   ESTRELLAS
+===================================================== */
+
+.estrella{
+
+    position:absolute;
+
+    width:3px;
+
+    height:3px;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:
+        0 0 5px currentColor,
+        0 0 10px currentColor;
+
+    animation:
+        parpadeo
+        1.5s
+        ease-in-out
+        infinite
+        alternate;
+
+    transition:
+        left .08s linear,
+        top .08s linear;
+
+    pointer-events:none;
+
+    z-index:50;
+}
+
+
+@keyframes parpadeo{
+
+    from{
+
+        opacity:.25;
+
+        transform:
+            scale(.7);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            scale(1.4);
+    }
+}
+
+
+/* =====================================================
+   FOTOS
+===================================================== */
+
+.foto{
+
+    position:absolute;
+
+    width:72px;
+
+    height:72px;
+
+    object-fit:cover;
+
+    border-radius:14px;
+
+    opacity:.35;
+
+    pointer-events:none;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    box-shadow:
+
+        0 0 8px
+        rgba(255,255,255,.15),
+
+        0 0 18px
+        rgba(0,255,130,.18);
+
+    animation:
+
+        movimientoLibre
+
+        var(--duracion)
+
+        ease-in-out
+
+        infinite
+
+        alternate;
+
+    animation-delay:
+        var(--delay);
+
+    z-index:100;
+}
+
+
+@keyframes movimientoLibre{
+
+    0%{
+
+        transform:
+            translate(
+                var(--movX1),
+                var(--movY1)
+            )
+            rotate(-8deg);
+    }
+
+    25%{
+
+        transform:
+            translate(
+                var(--movX2),
+                var(--movY2)
+            )
+            rotate(6deg);
+    }
+
+    50%{
+
+        transform:
+            translate(
+                var(--movX3),
+                var(--movY3)
+            )
+            rotate(-5deg);
+    }
+
+    75%{
+
+        transform:
+            translate(
+                var(--movX4),
+                var(--movY4)
+            )
+            rotate(8deg);
+    }
+
+    100%{
+
+        transform:
+            translate(
+                var(--movX5),
+                var(--movY5)
+            )
+            rotate(-6deg);
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .foto{
+
+        width:58px;
+
+        height:58px;
+
+        border-radius:12px;
+    }
+
+}
+
+
+/* =====================================================
+   ESTRELLA FUGAZ
+===================================================== */
+
+.estrellaFugaz{
+
+    position:absolute;
+
+    width:2px;
+
+    height:80px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            white
+        );
+
+    transform:
+        rotate(-45deg);
+
+    opacity:0;
+
+    animation:
+        fugaz
+        1.2s
+        linear
+        forwards;
+
+    pointer-events:none;
+}
+
+
+@keyframes fugaz{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+            translate(0,0)
+            rotate(-45deg);
+    }
+
+    15%{
+
+        opacity:1;
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:
+            translate(-300px,300px)
+            rotate(-45deg);
+    }
+
+}
+
+
+/* =====================================================
+   MENSAJE
+===================================================== */
+
+#mensaje{
+
+    position:absolute;
+
+    left:50%;
+
+    top:12%;
+
+    transform:
+        translateX(-50%);
+
+    width:90%;
+
+    text-align:center;
+
+    color:white;
+
+    font-size:18px;
+
+    text-shadow:
+        0 0 8px #00ff88,
+        0 0 20px #00cc66;
+
+    pointer-events:none;
+
+    z-index:5000;
+
+    transition:
+        opacity .8s ease;
+}
+
+
+/* =====================================================
+   CORAZÓN
+===================================================== */
+
+#corazon3D{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:0;
+
+    height:0;
+
+    transform:
+        translate(-50%,-50%)
+        rotateX(0deg)
+        rotateY(0deg);
+
+    transform-style:preserve-3d;
+
+    pointer-events:none;
+
+    z-index:4000;
+}
+
+
+#corazonLatido{
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:0;
+
+    height:0;
+
+    transform-origin:center;
+
+    transform-style:preserve-3d;
+
+    animation:
+        latido
+        1.2s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes latido{
+
+    0%,
+    100%{
+
+        transform:
+            scale(1);
+    }
+
+    15%{
+
+        transform:
+            scale(1.08);
+    }
+
+    30%{
+
+        transform:
+            scale(1);
+    }
+
+    45%{
+
+        transform:
+            scale(1.06);
+    }
+
+}
+
+
+/* =====================================================
+   ESTRELLAS DEL CORAZÓN VERDE
+===================================================== */
+
+.estrella.corazon{
+
+    width:4px;
+
+    height:4px;
+
+    background:#66ffb0 !important;
+
+    color:#66ffb0 !important;
+
+    box-shadow:
+
+        0 0 5px #00ff88,
+
+        0 0 12px #00cc66,
+
+        0 0 22px
+        rgba(0,255,130,.8);
+
+    animation:
+
+        brilloCorazon
+
+        1.5s
+
+        ease-in-out
+
+        infinite
+
+        alternate;
+
+    z-index:4500;
+}
+
+
+@keyframes brilloCorazon{
+
+    from{
+
+        opacity:.5;
+
+        transform:
+            scale(.8);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            scale(1.5);
+    }
+
+}
+
+
+/* =====================================================
+   TE AMO
+===================================================== */
+
+#teAmo{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.5);
+
+    opacity:0;
+
+    color:white;
+
+    font-size:
+        clamp(
+            42px,
+            12vw,
+            90px
+        );
+
+    font-weight:bold;
+
+    letter-spacing:5px;
+
+    text-shadow:
+
+        0 0 10px #66ffb0,
+
+        0 0 25px #00ff88,
+
+        0 0 50px #00cc66;
+
+    z-index:7000;
+
+    pointer-events:none;
+
+    transition:
+
+        opacity 1.2s ease,
+
+        transform 1.2s ease;
+}
+
+
+#teAmo.mostrar{
+
+    opacity:1;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1);
+}
+
+
+/* =====================================================
+   BOTÓN DE CARTAS
+===================================================== */
+
+#botonCartas{
+
+    position:absolute;
+
+    left:50%;
+
+    top:67%;
+
+    transform:
+        translateX(-50%)
+        scale(.7);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    z-index:8000;
+
+    padding:
+        14px 28px;
+
+    border:
+
+        1px solid
+        rgba(102,255,176,.7);
+
+    border-radius:30px;
+
+    background:
+        rgba(0,80,40,.55);
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    letter-spacing:.5px;
+
+    box-shadow:
+
+        0 0 10px
+        rgba(0,255,136,.35),
+
+        0 0 25px
+        rgba(0,200,100,.2);
+
+    backdrop-filter:
+        blur(8px);
+
+    transition:
+
+        opacity 1s ease,
+
+        transform 1s ease,
+
+        background .2s ease;
+}
+
+
+#botonCartas.mostrar{
+
+    opacity:1;
+
+    pointer-events:auto;
+
+    transform:
+        translateX(-50%)
+        scale(1);
+}
+
+
+#botonCartas:active{
+
+    transform:
+        translateX(-50%)
+        scale(.94);
+
+    background:
+        rgba(0,180,90,.55);
+}
+
+
+/* =====================================================
+   FOTOS DESPUÉS DEL CORAZÓN
+===================================================== */
+
+#universo.corazonActivo .foto{
+
+    opacity:.35;
+
+    z-index:100;
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     BLOQUEO
+===================================================== -->
+
+<div id="bloqueo">
+
+    <h1>
+        💚 Nuestro Universo 💚
+    </h1>
+
+    <p>
+        Ingresa la contraseña
+    </p>
+
+    <div id="pantallaPassword"></div>
+
+    <div id="teclado">
+
+        <button
+            class="botonNumero"
+            data-num="1">
+            1
+        </button>
+
+        <button
+            class="botonNumero"
+            data-num="2">
+            2
+        </button>
+
+        <button
+            class="botonNumero"
+            data-num="3">
+            3
+        </button>
+
+        <button
+            class="botonNumero"
+            data-num="4">
+            4
+        </button>
+
+        <button
+            class="botonNumero"
+            data-num="5">
+            5
+        </button>
+
+        <button
+            class="botonNumero"
+            data-num="6">
+            6
+        </button>
+
+        <button
+            class="botonNumero"
+            data-num="7">
+            7
+        </button>
+
+        <button
+            class="botonNumero"
+            data-num="8">
+            8
+        </button>
+
+        <button
+            class="botonNumero"
+            data-num="9">
+            9
+        </button>
+
+        <button
+            class="botonNumero"
+            data-num="borrar">
+            ⌫
+        </button>
+
+        <button
+            class="botonNumero"
+            data-num="0">
+            0
+        </button>
+
+        <button
+            class="botonNumero"
+            data-num="ok">
+            ✓
+        </button>
+
+    </div>
+
+    <div id="errorPassword"></div>
+
+</div>
+
+
+
+<!-- =====================================================
+     UNIVERSO
+===================================================== -->
+
+<div id="universo">
+
+    <div class="galaxia g1"></div>
+
+    <div class="galaxia g2"></div>
+
+    <div class="galaxia g3"></div>
+
+
+    <div id="mensaje">
+
+        💚 Presiona y mantén presionado 💚
+
+    </div>
+
+
+    <div id="corazon3D">
+
+        <div id="corazonLatido"></div>
+
+    </div>
+
+
+    <div id="teAmo">
+
+        TE AMO
+
+    </div>
+
+
+    <!-- BOTÓN -->
+
+    <button
+        id="botonCartas"
+        onclick="irALasCartas()">
+
+        💌 Ir a las cartas
+
+    </button>
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+const CONTRASENA =
+    "040723";
+
+
+let password = "";
+
+
+const bloqueo =
+    document.getElementById(
+        "bloqueo"
+    );
+
+
+const pantallaPassword =
+    document.getElementById(
+        "pantallaPassword"
+    );
+
+
+const errorPassword =
+    document.getElementById(
+        "errorPassword"
+    );
+
+
+const universo =
+    document.getElementById(
+        "universo"
+    );
+
+
+const mensaje =
+    document.getElementById(
+        "mensaje"
+    );
+
+
+const corazon3D =
+    document.getElementById(
+        "corazon3D"
+    );
+
+
+const teAmo =
+    document.getElementById(
+        "teAmo"
+    );
+
+
+const botonCartas =
+    document.getElementById(
+        "botonCartas"
+    );
+
+
+let estrellas = [];
+
+let fotos = [];
+
+
+let atrayendo = false;
+
+let corazonFormado = false;
+
+
+let dedoX = 50;
+
+let dedoY = 50;
+
+
+let pointerActivo = null;
+
+
+let posicionesEstrellas = [];
+
+
+/* =====================================================
+   CONTRASEÑA
+===================================================== */
+
+document
+.querySelectorAll(".botonNumero")
+.forEach(boton => {
+
+    boton.addEventListener(
+        "click",
+        () => {
+
+            const valor =
+                boton.dataset.num;
+
+
+            if(
+                valor === "borrar"
+            ){
+
+                password =
+                    password.slice(
+                        0,
+                        -1
+                    );
+
+                actualizarPassword();
+
+                return;
+            }
+
+
+            if(
+                valor === "ok"
+            ){
+
+                comprobarPassword();
+
+                return;
+            }
+
+
+            if(
+                password.length >= 6
+            ){
+
+                return;
+            }
+
+
+            password += valor;
+
+
+            actualizarPassword();
+
+
+            if(
+                password.length === 6
+            ){
+
+                comprobarPassword();
+            }
+
+        }
+    );
+
+});
+
+
+function actualizarPassword(){
+
+    pantallaPassword.textContent =
+        "•".repeat(
+            password.length
+        );
+
+}
+
+
+function comprobarPassword(){
+
+    if(
+        password === CONTRASENA
+    ){
+
+        errorPassword.textContent =
+            "";
+
+        bloqueo.style.opacity =
+            "0";
+
+
+        setTimeout(() => {
+
+            bloqueo.style.display =
+                "none";
+
+
+            universo.classList.add(
+                "activo"
+            );
+
+
+            iniciarUniverso();
+
+        },700);
+
+    }
+
+    else{
+
+        errorPassword.textContent =
+            "Contraseña incorrecta";
+
+
+        password = "";
+
+
+        actualizarPassword();
+
+    }
+
+}
+
+
+/* =====================================================
+   UNIVERSO
+===================================================== */
+
+function iniciarUniverso(){
+
+    crearEstrellas();
+
+    crearFotos();
+
+    iniciarEstrellasFugaces();
+
+    activarInteraccion();
+
+}
+
+
+/* =====================================================
+   ESTRELLAS
+===================================================== */
+
+function crearEstrellas(){
+
+    const cantidad =
+        window.innerWidth < 600
+        ? 240
+        : 360;
+
+
+    const colores = [
+
+        "#ffffff",
+        "#b8ffd9",
+        "#8affc1",
+        "#d4ffe6",
+        "#66ffb0",
+        "#caffdf"
+
+    ];
+
+
+    for(
+        let i=0;
+        i<cantidad;
+        i++
+    ){
+
+        const estrella =
+            document.createElement(
+                "div"
+            );
+
+
+        estrella.className =
+            "estrella";
+
+
+        estrella.style.color =
+            colores[
+                Math.floor(
+                    Math.random()
+                    *
+                    colores.length
+                )
+            ];
+
+
+        const x =
+            Math.random()
+            *
+            window.innerWidth;
+
+
+        const y =
+            Math.random()
+            *
+            window.innerHeight;
+
+
+        estrella.style.left =
+            x + "px";
+
+
+        estrella.style.top =
+            y + "px";
+
+
+        estrella.style.animationDelay =
+            Math.random()*2 + "s";
+
+
+        universo.appendChild(
+            estrella
+        );
+
+
+        estrellas.push(
+            estrella
+        );
+
+
+        posicionesEstrellas.push({
+
+            x:x,
+
+            y:y
+
+        });
+
+    }
+
+}
+
+
+/* =====================================================
+   FOTOS
+===================================================== */
+
+function crearFotos(){
+
+    for(
+        let i=1;
+        i<=33;
+        i++
+    ){
+
+        const foto =
+            document.createElement(
+                "img"
+            );
+
+
+        foto.className =
+            "foto";
+
+
+        foto.src =
+            `fotos/foto${String(i).padStart(2,"0")}.jpg`;
+
+
+        const ancho =
+            window.innerWidth;
+
+
+        const alto =
+            window.innerHeight;
+
+
+        const x =
+            Math.random()
+            *
+            Math.max(
+                20,
+                ancho-90
+            );
+
+
+        const y =
+            Math.random()
+            *
+            Math.max(
+                20,
+                alto-90
+            );
+
+
+        foto.style.left =
+            x + "px";
+
+
+        foto.style.top =
+            y + "px";
+
+
+        foto.style.setProperty(
+            "--duracion",
+            (
+                8 +
+                Math.random()*12
+            )
+            + "s"
+        );
+
+
+        foto.style.setProperty(
+            "--delay",
+            (
+                -Math.random()*15
+            )
+            + "s"
+        );
+
+
+        /*
+           Movimiento X
+        */
+
+        foto.style.setProperty(
+            "--movX1",
+            (
+                -30 +
+                Math.random()*60
+            )
+            + "px"
+        );
+
+
+        foto.style.setProperty(
+            "--movX2",
+            (
+                -70 +
+                Math.random()*140
+            )
+            + "px"
+        );
+
+
+        foto.style.setProperty(
+            "--movX3",
+            (
+                -50 +
+                Math.random()*100
+            )
+            + "px"
+        );
+
+
+        foto.style.setProperty(
+            "--movX4",
+            (
+                -90 +
+                Math.random()*180
+            )
+            + "px"
+        );
+
+
+        foto.style.setProperty(
+            "--movX5",
+            (
+                -40 +
+                Math.random()*80
+            )
+            + "px"
+        );
+
+
+        /*
+           Movimiento Y
+        */
+
+        foto.style.setProperty(
+            "--movY1",
+            (
+                -30 +
+                Math.random()*60
+            )
+            + "px"
+        );
+
+
+        foto.style.setProperty(
+            "--movY2",
+            (
+                -80 +
+                Math.random()*160
+            )
+            + "px"
+        );
+
+
+        foto.style.setProperty(
+            "--movY3",
+            (
+                -50 +
+                Math.random()*100
+            )
+            + "px"
+        );
+
+
+        foto.style.setProperty(
+            "--movY4",
+            (
+                -90 +
+                Math.random()*180
+            )
+            + "px"
+        );
+
+
+        foto.style.setProperty(
+            "--movY5",
+            (
+                -40 +
+                Math.random()*80
+            )
+            + "px"
+        );
+
+
+        foto.style.opacity =
+            .25 +
+            Math.random()*.35;
+
+
+        foto.onerror =
+            function(){
+
+                this.style.display =
+                    "none";
+
+            };
+
+
+        universo.appendChild(
+            foto
+        );
+
+
+        fotos.push(
+            foto
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   ESTRELLAS FUGACES
+===================================================== */
+
+function iniciarEstrellasFugaces(){
+
+    setInterval(() => {
+
+        if(
+            !universo.classList.contains(
+                "activo"
+            )
+        ){
+
+            return;
+        }
+
+
+        const fugaz =
+            document.createElement(
+                "div"
+            );
+
+
+        fugaz.className =
+            "estrellaFugaz";
+
+
+        fugaz.style.left =
+            (
+                20 +
+                Math.random()*80
+            )
+            + "%";
+
+
+        fugaz.style.top =
+            Math.random()*60
+            + "%";
+
+
+        universo.appendChild(
+            fugaz
+        );
+
+
+        setTimeout(() => {
+
+            fugaz.remove();
+
+        },1300);
+
+
+    },3200);
+
+}
+
+
+/* =====================================================
+   INTERACCIÓN
+===================================================== */
+
+function activarInteraccion(){
+
+    universo.addEventListener(
+        "pointerdown",
+        comenzarAtraccion,
+        {
+            passive:false
+        }
+    );
+
+
+    universo.addEventListener(
+        "pointermove",
+        moverDedo,
+        {
+            passive:false
+        }
+    );
+
+
+    universo.addEventListener(
+        "pointerup",
+        soltarPantalla,
+        {
+            passive:false
+        }
+    );
+
+
+    universo.addEventListener(
+        "pointercancel",
+        cancelarInteraccion,
+        {
+            passive:false
+        }
+    );
+
+}
+
+
+/* =====================================================
+   PRESIONAR
+===================================================== */
+
+function comenzarAtraccion(event){
+
+    if(
+        corazonFormado
+    ){
+
+        return;
+    }
+
+
+    if(
+        pointerActivo !== null
+    ){
+
+        return;
+    }
+
+
+    event.preventDefault();
+
+
+    pointerActivo =
+        event.pointerId;
+
+
+    atrayendo = true;
+
+
+    try{
+
+        universo.setPointerCapture(
+            event.pointerId
+        );
+
+    }
+
+    catch(e){}
+
+
+    obtenerPosicionPointer(
+        event
+    );
+
+
+    mensaje.style.opacity =
+        "0";
+
+}
+
+
+/* =====================================================
+   MOVER
+===================================================== */
+
+function moverDedo(event){
+
+    if(
+        !atrayendo
+    ){
+
+        return;
+    }
+
+
+    if(
+        pointerActivo !==
+        event.pointerId
+    ){
+
+        return;
+    }
+
+
+    event.preventDefault();
+
+
+    obtenerPosicionPointer(
+        event
+    );
+
+}
+
+
+/* =====================================================
+   POSICIÓN
+===================================================== */
+
+function obtenerPosicionPointer(event){
+
+    dedoX =
+        event.clientX;
+
+
+    dedoY =
+        event.clientY;
+
+
+    moverEstrellasHaciaDedo();
+
+}
+
+
+/* =====================================================
+   AGRUPAR ESTRELLAS
+===================================================== */
+
+function moverEstrellasHaciaDedo(){
+
+    if(
+        !atrayendo
+    ){
+
+        return;
+    }
+
+
+    posicionesEstrellas.forEach(
+        (pos,i) => {
+
+            const estrella =
+                estrellas[i];
+
+
+            const fuerza =
+                .065;
+
+
+            pos.x +=
+                (
+                    dedoX -
+                    pos.x
+                )
+                *
+                fuerza;
+
+
+            pos.y +=
+                (
+                    dedoY -
+                    pos.y
+                )
+                *
+                fuerza;
+
+
+            estrella.style.left =
+                pos.x + "px";
+
+
+            estrella.style.top =
+                pos.y + "px";
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SOLTAR
+===================================================== */
+
+function soltarPantalla(event){
+
+    if(
+        !atrayendo
+    ){
+
+        return;
+    }
+
+
+    if(
+        pointerActivo !==
+        event.pointerId
+    ){
+
+        return;
+    }
+
+
+    event.preventDefault();
+
+
+    atrayendo = false;
+
+
+    pointerActivo = null;
+
+
+    try{
+
+        universo.releasePointerCapture(
+            event.pointerId
+        );
+
+    }
+
+    catch(e){}
+
+
+    /*
+       EL CORAZÓN APARECE
+       SOLO AL SOLTAR.
+    */
+
+    formarCorazon();
+
+}
+
+
+/* =====================================================
+   CANCELAR
+===================================================== */
+
+function cancelarInteraccion(event){
+
+    if(
+        pointerActivo !==
+        event.pointerId
+    ){
+
+        return;
+    }
+
+
+    atrayendo = false;
+
+    pointerActivo = null;
+
+
+    try{
+
+        universo.releasePointerCapture(
+            event.pointerId
+        );
+
+    }
+
+    catch(e){}
+
+}
+
+
+/* =====================================================
+   FORMAR CORAZÓN
+===================================================== */
+
+function formarCorazon(){
+
+    if(
+        corazonFormado
+    ){
+
+        return;
+    }
+
+
+    corazonFormado = true;
+
+
+    universo.classList.add(
+        "corazonActivo"
+    );
+
+
+    mensaje.style.opacity =
+        "0";
+
+
+    estrellas.forEach(
+        (estrella,i) => {
+
+            const cantidad =
+                estrellas.length;
+
+
+            const t =
+                Math.PI *
+                2 *
+                i /
+                cantidad;
+
+
+            const x =
+                16 *
+                Math.pow(
+                    Math.sin(t),
+                    3
+                );
+
+
+            const y =
+                13 *
+                Math.cos(t)
+                -
+                5 *
+                Math.cos(2*t)
+                -
+                2 *
+                Math.cos(3*t)
+                -
+                Math.cos(4*t);
+
+
+            const escala =
+                window.innerWidth < 600
+                ? 2.05
+                : 2.6;
+
+
+            const centroX =
+                window.innerWidth /
+                2;
+
+
+            const centroY =
+                window.innerHeight /
+                2;
+
+
+            const destinoX =
+                centroX +
+                x *
+                escala *
+                (
+                    window.innerWidth /
+                    100
+                );
+
+
+            const destinoY =
+                centroY -
+                y *
+                escala *
+                (
+                    window.innerWidth /
+                    100
+                );
+
+
+            estrella.classList.add(
+                "corazon"
+            );
+
+
+            estrella.style.left =
+                destinoX + "px";
+
+
+            estrella.style.top =
+                destinoY + "px";
+
+
+            estrella.style.zIndex =
+                "4500";
+
+        }
+    );
+
+
+    /*
+       Primero aparece TE AMO.
+    */
+
+    setTimeout(() => {
+
+        teAmo.classList.add(
+            "mostrar"
+        );
+
+    },3300);
+
+
+    /*
+       Después aparece el botón.
+    */
+
+    setTimeout(() => {
+
+        botonCartas.classList.add(
+            "mostrar"
+        );
+
+    },4500);
+
+}
+
+
+/* =====================================================
+   BOTÓN CARTAS
+===================================================== */
+
+function irALasCartas(){
+
+    window.location.href =
+        "cartas.html";
+
+}
+
+
+/* =====================================================
+   MOVIMIENTO 3D
+===================================================== */
+
+document.addEventListener(
+    "mousemove",
+    event => {
+
+        if(
+            !corazonFormado
+        ){
+
+            return;
+        }
+
+
+        const centroX =
+            window.innerWidth /
+            2;
+
+
+        const centroY =
+            window.innerHeight /
+            2;
+
+
+        const rotY =
+            (
+                (
+                    event.clientX -
+                    centroX
+                )
+                /
+                window.innerWidth
+            )
+            *
+            20;
+
+
+        const rotX =
+            -(
+                (
+                    event.clientY -
+                    centroY
+                )
+                /
+                window.innerHeight
+            )
+            *
+            20;
+
+
+        corazon3D.style.transform =
+            `
+            translate(-50%,-50%)
+            rotateX(${rotX}deg)
+            rotateY(${rotY}deg)
+            `;
+
+    }
+);
+
+
+/* =====================================================
+   MOVIMIENTO DEL CELULAR
+===================================================== */
+
+window.addEventListener(
+    "deviceorientation",
+    event => {
+
+        if(
+            !corazonFormado
+        ){
+
+            return;
+        }
+
+
+        if(
+            event.gamma === null ||
+            event.beta === null
+        ){
+
+            return;
+        }
+
+
+        const gamma =
+            Math.max(
+                -20,
+                Math.min(
+                    20,
+                    event.gamma
+                )
+            );
+
+
+        const beta =
+            Math.max(
+                -20,
+                Math.min(
+                    20,
+                    event.beta
+                )
+            );
+
+
+        corazon3D.style.transform =
+            `
+            translate(-50%,-50%)
+            rotateX(${-beta}deg)
+            rotateY(${gamma}deg)
+            `;
+
+    }
+);
+
+
+/* =====================================================
+   PERMISO IPHONE
+===================================================== */
+
+document.addEventListener(
+    "click",
+    () => {
+
+        if(
+
+            typeof DeviceOrientationEvent !==
+            "undefined"
+
+            &&
+
+            typeof DeviceOrientationEvent
+            .requestPermission ===
+            "function"
+
+        ){
+
+            DeviceOrientationEvent
+            .requestPermission()
+            .catch(() => {});
+
+        }
+
+    },
+    {
+        once:true
+    }
+);
+
+</script>
+
+</body>
+
+</html>
+```
